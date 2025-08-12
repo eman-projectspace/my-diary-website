@@ -1,37 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import DiaryEntries from "./pages/DiaryEntries";
 import NewEntry from "./pages/NewEntry";
+import Header from "./components/Header";
 
 function App() {
-  const [entries, setEntries] = useState([]);
-
-
-  useEffect(() => {
+  const [entries, setEntries] = useState(() => {
     const savedEntries = localStorage.getItem("diaryEntries");
-    if (savedEntries) {
-      setEntries(JSON.parse(savedEntries));
-    }
-  }, []);
-
+    return savedEntries ? JSON.parse(savedEntries) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem("diaryEntries", JSON.stringify(entries));
   }, [entries]);
 
   const addEntry = (newEntry) => {
-    setEntries([...entries, newEntry]);
+    setEntries((prevEntries) => [newEntry, ...prevEntries]);
   };
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/entries" element={<DiaryEntries entries={entries} />} />
-        <Route path="/new" element={<NewEntry addEntry={addEntry} />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/entries" element={<DiaryEntries entries={entries} />} />
+          <Route path="/new" element={<NewEntry addEntry={addEntry} />} />
+        </Routes>
+      </Layout>
     </Router>
+  );
+}
+
+// Layout to conditionally show header
+function Layout({ children }) {
+  const location = useLocation();
+  const hideHeaderOn = ["/"]; // pages where header is hidden
+
+  return (
+    <>
+      {!hideHeaderOn.includes(location.pathname) && <Header />}
+      {children}
+    </>
   );
 }
 
