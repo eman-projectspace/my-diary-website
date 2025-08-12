@@ -9,19 +9,17 @@ const NewEntry = ({ addEntry }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (date && text) {
-      addEntry({ date, text });
+      addEntry({
+        id: Date.now(), // unique id
+        date,
+        text,
+      });
       navigate("/entries");
     }
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-[#fff8e7] p-6"
-      style={{
-        backgroundImage:
-          "url('https://www.transparenttextures.com/patterns/paper-fibers.png')",
-      }}
-    >
+    <div className="min-h-screen flex items-center justify-center bg-[#fff8e7] p-6">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg border-4 border-[#d2b48c]"
@@ -42,7 +40,7 @@ const NewEntry = ({ addEntry }) => {
           onChange={(e) => setText(e.target.value)}
           placeholder="Write your thoughts here..."
           rows="8"
-          className="w-full p-4 border border-[#d2b48c] rounded-lg bg-[url('https://www.transparenttextures.com/patterns/lined-paper.png')] bg-repeat"
+          className="w-full p-4 border border-[#d2b48c] rounded-lg"
         ></textarea>
 
         <button

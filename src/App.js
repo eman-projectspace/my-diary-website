@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import DiaryEntries from "./pages/DiaryEntries";
 import NewEntry from "./pages/NewEntry";
 import Header from "./components/Header";
+import Setting from "./components/Setting";
 
 function App() {
   const [entries, setEntries] = useState(() => {
@@ -26,16 +27,17 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/entries" element={<DiaryEntries entries={entries} />} />
           <Route path="/new" element={<NewEntry addEntry={addEntry} />} />
+          {/* Pass entries and updater to Settings */}
+          <Route path="/setting" element={<Setting notes={entries} setNotes={setEntries} />} />
         </Routes>
       </Layout>
     </Router>
   );
 }
 
-// Layout to conditionally show header
 function Layout({ children }) {
   const location = useLocation();
-  const hideHeaderOn = ["/"]; // pages where header is hidden
+  const hideHeaderOn = ["/"];
 
   return (
     <>

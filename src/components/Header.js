@@ -87,7 +87,7 @@ export default function DiaryHeader() {
                 title="Profile"
               >
                 <Cog6ToothIcon className="w-5 h-5 text-gray-600" />
-                <span className="text-sm hidden md:inline text-gray-700">Settings</span>
+                <span className="text-sm hidden md:inline text-gray-700" onClick={() => navigate("/setting")}>Settings</span>
               </button>
 
             </div>
