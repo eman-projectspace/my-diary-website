@@ -24,8 +24,8 @@ const NewEntry = ({ addEntry }) => {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg border-4 border-[#d2b48c]"
       >
-        <h1 className="text-3xl font-[Pacifico] text-[#5d4037] mb-6 text-center">
-          ✍ Write a New Entry
+        <h1 className="text-2xl font-[Pacifico] text-[#5d4037] mb-6 text-center">
+          ✨ Pen Down Your Thoughts
         </h1>
 
         <input
