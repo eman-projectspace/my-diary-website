@@ -39,23 +39,7 @@ export default function DiaryHeader() {
             </button>
           </div>
 
-          {/* Center: Search (hidden on very small screens) */}
-          <div className="flex-1 px-4 hidden sm:flex items-center justify-center">
-            <div className="w-full max-w-md">
-              <label htmlFor="search" className="sr-only">Search entries</label>
-              <div className="relative">
-                <input
-                  id="search"
-                  type="search"
-                  placeholder="Search entries, tags or feelings..."
-                  className="w-full rounded-xl border border-transparent py-2 pl-10 pr-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-200 bg-white/70"
-                />
-                <svg className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z" />
-                </svg>
-              </div>
-            </div>
-          </div>
+
 
           {/* Right: Actions */}
           <div className="flex items-center gap-3">
@@ -118,8 +102,7 @@ export default function DiaryHeader() {
         <div className={`${open ? 'max-h-96 py-4' : 'max-h-0'} overflow-hidden transition-all duration-300`}>
           <div className="flex flex-col gap-3 pb-4">
             <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/60" onClick={() => navigate("/new")} >New Entry</button>
-            <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/60">Search</button>
-            <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/60">Settings</button>
+            <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/60" onClick={() => navigate("/setting")}>Settings</button>
           </div>
         </div>
       </div>
