@@ -14,6 +14,22 @@ export default function DiaryHeader() {
 
   const navigate = useNavigate();
 
+
+  const handleSettingsClick = () => {
+    const storedUser = localStorage.getItem("username") || "admin";
+    const storedPass = localStorage.getItem("password") || "1234";
+
+    const name = prompt("Enter username:");
+    const pass = prompt("Enter password:");
+
+    if (name === storedUser && pass === storedPass) {
+      navigate("/setting");
+    } else {
+      alert("Access Denied!");
+    }
+  };
+
+
   return (
     <header className="w-full bg-gradient-to-r from-rose-50 via-amber-50 to-indigo-50 shadow-md sticky top-0 z-40">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,7 +87,7 @@ export default function DiaryHeader() {
                 title="Profile"
               >
                 <Cog6ToothIcon className="w-5 h-5 text-gray-600" />
-                <span className="text-sm hidden md:inline text-gray-700" onClick={() => navigate("/setting")}>Settings</span>
+                <span className="text-sm hidden md:inline text-gray-700" onClick={handleSettingsClick}>Settings</span>
               </button>
 
             </div>
@@ -102,7 +118,7 @@ export default function DiaryHeader() {
         <div className={`${open ? 'max-h-96 py-4' : 'max-h-0'} overflow-hidden transition-all duration-300`}>
           <div className="flex flex-col gap-3 pb-4">
             <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/60" onClick={() => navigate("/new")} >New Entry</button>
-            <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/60" onClick={() => navigate("/setting")}>Settings</button>
+            <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/60" onClick={handleSettingsClick}>Settings</button>
           </div>
         </div>
       </div>

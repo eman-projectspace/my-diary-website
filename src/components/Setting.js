@@ -1,9 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PencilIcon, TrashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
 export default function Setting({ notes, setNotes }) {
   const [editNoteId, setEditNoteId] = useState(null);
   const [editText, setEditText] = useState("");
+
+  // Username & Password states
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    setUsername(localStorage.getItem("username") || "admin");
+    setPassword(localStorage.getItem("password") || "1234");
+  }, []);
+
+  const saveCredentials = () => {
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+    alert("Username/Password updated!");
+  };
 
   const deleteNote = (id) => {
     setNotes((prev) => prev.filter((note) => note.id !== id));
@@ -38,7 +53,7 @@ export default function Setting({ notes, setNotes }) {
         <p className="text-gray-500 italic">No notes found. Start writing to see them here.</p>
       )}
 
-      <div className="space-y-3">
+      <div className="space-y-3 mb-10">
         {notes.map((note) => (
           <div
             key={note.id}
@@ -92,6 +107,34 @@ export default function Setting({ notes, setNotes }) {
             )}
           </div>
         ))}
+      </div>
+
+      {/* Change Username & Password */}
+      <div className="bg-white shadow-sm border border-gray-200 rounded-xl p-4 space-y-3">
+        <h2 className="text-lg font-bold">🔐 Change Login Details</h2>
+
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter new username"
+          className="w-full border px-3 py-2 rounded"
+        />
+
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter new password"
+          className="w-full border px-3 py-2 rounded"
+        />
+
+        <button
+          onClick={saveCredentials}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Save Changes
+        </button>
       </div>
     </div>
   );
